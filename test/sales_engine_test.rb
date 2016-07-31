@@ -64,4 +64,8 @@ class SalesEngineTest < MiniTest::Test
   def test_it_has_all_the_merchants
     assert_instance_of Item, @se.all_items.last
   end
+
+  def test_it_gets_the_invoices
+    assert_instance_of Invoice, @se.find_invoices_by_merchant_id(12335938)[0]
+  end
 end

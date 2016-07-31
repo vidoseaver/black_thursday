@@ -10,6 +10,9 @@ class MerchantTest < MiniTest::Test
     @se = SalesEngine.from_csv({
                                  :items     => "./data/items.csv",
                                  :merchants => "./data/merchants.csv",
+                                 :invoices  => "./data/invoices.csv",
+                                 :transactions => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv"
                                 })
     @merchant = Merchant.new({ :id         => "12334105",
                                :name       => "Shopin1901",
@@ -35,12 +38,16 @@ class MerchantTest < MiniTest::Test
   end
 
   def test_it_can_return_self
-    # assert_equal true, @merchant.parent.is_a?(MerchantTest)
     assert_equal nil, @merchant.parent
   end
 
   def test_it_gets_the_item
-    assert_instance_of Item,   @se.merchants.find_by_id(12334141).items[0]
+    assert_instance_of Item, @se.merchants.find_by_id(12334141).items[0]
   end
+
+  def test_it_gets_the_invoice
+    assert_instance_of Invoice, @se.merchants.find_invoices_by_merchant_id(12335938)[0]
+  end
+
 
 end

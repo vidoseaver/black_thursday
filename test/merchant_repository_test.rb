@@ -14,6 +14,9 @@ class MerchantRepositoryTest < MiniTest::Test
     @se = SalesEngine.from_csv({
                                  :items     => "./data/items.csv",
                                  :merchants => "./data/merchants.csv",
+                                 :invoices  => "./data/invoices.csv",
+                                 :transactions => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv"
                                 })
     @merchant_repository = MerchantRepository.new("./data/merchants.csv")
   end
@@ -60,7 +63,12 @@ class MerchantRepositoryTest < MiniTest::Test
   def test_it_can_pull_items
     assert_instance_of Item, @se.merchants.find_items_by_merchant_id(12334141)[0]
   end
+
   def test_merchant_count
     assert_equal 475, @se.merchant_count
+  end
+
+  def test_it_gets_the_invoices
+    assert_instance_of Invoice, @se.merchants.find_invoices_by_merchant_id(12335938)[0]
   end
 end

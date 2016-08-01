@@ -22,5 +22,9 @@ class Invoice
   end
   def merchant
     @parent.find_merchant_by_id(merchant_id)
-  end 
+  end
+
+  def items
+    @parent.find_items_by_invoice_id(id)
+  end
 end

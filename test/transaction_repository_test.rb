@@ -9,11 +9,12 @@ class TranactionRepositoryTest < MiniTest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-                                 :items     => "./data/items.csv",
-                                 :merchants => "./data/merchants.csv",
-                                 :invoices  => "./data/invoices.csv",
-                                 :transactions => "./data/transactions.csv",
-                                 :invoice_items => "./data/invoice_items.csv"
+                                 :items         => "./data/items.csv",
+                                 :merchants     => "./data/merchants.csv",
+                                 :invoices      => "./data/invoices.csv",
+                                 :transactions  => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv",
+                                 :customers     => "./data/customers.csv"
                                 })
     @transaction_repository = TransactionRepository.new("./data/transactions.csv")
   end

@@ -11,7 +11,8 @@ class SalesAnalystTest < MiniTest::Test
                                              :merchants => "./data/merchants.csv",
                                              :invoices  => "./data/invoices.csv",
                                              :transactions => "./data/transactions.csv",
-                                             :invoice_items => "./data/invoice_items.csv"
+                                             :invoice_items => "./data/invoice_items.csv",
+                                             :customers => "./data/customers.csv"
                                             }))
   end
 

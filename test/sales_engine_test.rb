@@ -12,7 +12,8 @@ class SalesEngineTest < MiniTest::Test
       :merchants => "./data/merchants.csv",
       :invoices  => "./data/invoices.csv",
       :transactions => "./data/transactions.csv",
-      :invoice_items => "./data/invoice_items.csv"
+      :invoice_items => "./data/invoice_items.csv",
+      :customers => "./data/customers.csv"
     })
   end
 
@@ -69,5 +70,9 @@ class SalesEngineTest < MiniTest::Test
 
   def test_it_gets_all_invoices
     assert_equal 19, @se.all_invoices.length
+  end
+
+  def test_it_gets_all_items_by_invoice_id
+    assert_instance_of Item, @se.find_items_by_invoice_id(1).first
   end
 end

@@ -3,6 +3,7 @@ require_relative  "../lib/merchant_repository"
 require_relative  "../lib/invoice_repository"
 require_relative  "../lib/transactions_repository"
 require_relative  "../lib/invoice_item_repository"
+require_relative  "../lib/customer_repository"
 require "csv"
 require "pry"
 
@@ -12,7 +13,8 @@ class SalesEngine
               :merchants,
               :invoices,
               :transactions,
-              :invoice_items
+              :invoice_items,
+              :customers
 
   def initialize(files_to_load)
       @items = ItemRepository.new(files_to_load[:items], self)
@@ -20,6 +22,7 @@ class SalesEngine
       @invoices = InvoiceRepository.new(files_to_load[:invoices], self)
       @transactions = TransactionRepository.new(files_to_load[:transactions], self)
       @invoice_items = InvoiceItemRepository.new(files_to_load[:invoice_items], self)
+      @customers = CustomerRepository.new(files_to_load[:customers], self)
 
   end
 
@@ -37,6 +40,13 @@ class SalesEngine
 
   def find_merchant_by_id(merchant_id_input)
     merchants.find_by_id(merchant_id_input)
+  end
+
+  def find_items_by_invoice_id(invoice_id_input)
+    invoice_items_to_iterate  = invoice_items.find_all_by_invoice_id(invoice_id_input)
+    invoice_items_to_iterate.map do |invoice_item|
+      items.find_by_id(invoice_item.item_id)
+    end
   end
 
   def merchant_count

@@ -8,12 +8,13 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   attr_reader :invoice_item_repository
 
   def setup
-     @se = SalesEngine.from_csv({
-                                 :items     => "./data/items.csv",
-                                 :merchants => "./data/merchants.csv",
-                                 :invoices  => "./data/invoices.csv",
-                                 :transactions => "./data/transactions.csv",
-                                 :invoice_items => "./data/invoice_items.csv"
+    @se = SalesEngine.from_csv({
+                                 :items         => "./data/items.csv",
+                                 :merchants     => "./data/merchants.csv",
+                                 :invoices      => "./data/invoices.csv",
+                                 :transactions  => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv",
+                                 :customers     => "./data/customers.csv"
                                 })
     @invoice_item_repository = InvoiceItemRepository.new("./data/invoice_items.csv")
   end

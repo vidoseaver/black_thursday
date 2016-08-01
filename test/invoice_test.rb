@@ -6,12 +6,13 @@ require_relative "../lib/sales_engine"
 class InvoiceTest < MiniTest::Test
   def setup
     @se = SalesEngine.from_csv({
-        :items     => "./data/items.csv",
-        :merchants => "./data/merchants.csv",
-        :invoices  => "./data/invoices.csv",
-        :transactions => "./data/transactions.csv",
-        :invoice_items => "./data/invoice_items.csv"
-      })
+                                 :items         => "./data/items.csv",
+                                 :merchants     => "./data/merchants.csv",
+                                 :invoices      => "./data/invoices.csv",
+                                 :transactions  => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv",
+                                 :customers     => "./data/customers.csv"
+                                })
     @invoice = Invoice.new({ :id           => "1",
                              :customer_id  => "1",
                              :merchant_id  => "12335938",
@@ -47,5 +48,9 @@ class InvoiceTest < MiniTest::Test
 
   def test_it_finds_by_merchant_id
     assert_instance_of Merchant, @se.invoices.find_merchant_by_id(12335955)
+  end
+
+  def test_it_returns_array_of_items
+    assert_instance_of Item, @se.invoice_repository.find_by_id(1).items.first 
   end
 end

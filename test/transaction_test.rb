@@ -31,7 +31,7 @@ class TransactionTest < MiniTest::Test
     end
 
     def test_it_holds_credit_card_expiration_date
-      assert_equal 2179, @first_transaction.credit_card_expiration_date
+      assert_equal "2179", @first_transaction.credit_card_expiration_date
     end
 
     def test_it_holds_a_result

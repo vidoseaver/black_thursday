@@ -55,6 +55,16 @@ attr_reader :all
     @sales_engine.find_items_by_invoice_id(invoice_id_input)
   end
 
+  def find_transactions_by_invoice_id(invoice_id_input)
+    @sales_engine.find_transactions_by_invoice_id(invoice_id_input)
+  end
+
+  def find_customer_by_invoice_id(customer_id_input)
+    @sales_engine.find_customer_by_invoice_id(customer_id_input)
+  end
+
+
+
   def inspect
   end
 

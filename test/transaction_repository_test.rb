@@ -59,4 +59,7 @@ class TranactionRepositoryTest < MiniTest::Test
     assert_equal 2179, transaction_repository.find_all_by_result('success').first.invoice_id
   end
 
+  def test_it_gets_all_items_by_invoice_id
+    assert_instance_of Invoice, @se.transactions.find_by_id(40).invoice
+  end
 end

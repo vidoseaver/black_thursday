@@ -73,6 +73,10 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_it_gets_all_items_by_invoice_id
-    assert_instance_of Item, @se.find_items_by_invoice_id(1).first
+    assert_instance_of Item, @se.find_items_by_invoice_id(3).last
+  end
+
+  def test_it_gets_all_items_by_invoice_id
+    assert_instance_of Invoice, @se.find_invoice_by_invoice_id(14)
   end
 end

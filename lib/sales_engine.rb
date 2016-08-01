@@ -49,6 +49,18 @@ class SalesEngine
     end
   end
 
+  def find_transactions_by_invoice_id(invoice_id_input)
+    transactions.find_all_by_invoice_id(invoice_id_input)
+  end
+
+  def find_customer_by_invoice_id(customer_id_input)
+    customers.find_by_id(customer_id_input)
+  end
+
+  def find_invoice_by_invoice_id(invoice_id_input)
+    invoices.find_by_id(invoice_id_input)
+  end
+
   def merchant_count
     merchants.all.count
   end
@@ -72,4 +84,6 @@ class SalesEngine
   def all_invoices
     invoices.all
   end
+
+
 end

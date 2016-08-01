@@ -27,4 +27,14 @@ class Invoice
   def items
     @parent.find_items_by_invoice_id(id)
   end
+
+  def transactions
+    @parent.find_transactions_by_invoice_id(id)
+  end
+
+  def customer
+    @parent.find_customer_by_invoice_id(customer_id)
+  end
+
+
 end

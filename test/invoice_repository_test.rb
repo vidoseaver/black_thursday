@@ -66,6 +66,15 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
 
   def test_it_finds_items_by_invoice_id
-    assert_instance_of Item, @se.find_items_by_invoice_id(1).last
+    assert_equal true, @se.invoices.find_items_by_invoice_id(3).is_a?(Array)
   end
+
+  def test_transactions_by_invoice_id
+    assert_instance_of Transaction, @se.invoices.find_transactions_by_invoice_id(19).last
+  end
+
+  def test_it_returns_a_customer
+    assert_instance_of Customer, @se.invoices.find_customer_by_invoice_id(2)
+  end
+
 end

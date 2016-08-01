@@ -22,4 +22,8 @@ class Transaction
               @updated_at            = Time.parse(item_data[:updated_at])
               @parent                = parent
   end
+
+  def invoice
+    @parent.find_invoice_by_invoice_id(invoice_id)
+  end
 end

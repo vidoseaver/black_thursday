@@ -1,6 +1,4 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require_relative '../lib/transaction'
 require 'bigdecimal'
 
@@ -9,7 +7,7 @@ class TransactionTest < MiniTest::Test
       @first_transaction = Transaction.new({:id  => "1",
             :invoice_id                       => "2179",
             :credit_card_number            => "4068631943231473",
-            :credit_card_expiration_date   => "217",
+            :credit_card_expiration_date   => "2179",
             :result                        => "success",
             :created_at                    => "2012-02-26 20:56:56 UTC	",
             :updated_at                     => "2012-02-26 20:56:56 UTC",
@@ -33,7 +31,7 @@ class TransactionTest < MiniTest::Test
     end
 
     def test_it_holds_credit_card_expiration_date
-      assert_equal 217, @first_transaction.credit_card_expiration_date
+      assert_equal 2179, @first_transaction.credit_card_expiration_date
     end
 
     def test_it_holds_a_result
@@ -51,5 +49,5 @@ class TransactionTest < MiniTest::Test
     def test_it_returns_self
       assert_equal true, @first_transaction.parent.is_a?(TransactionTest)
     end
-  
+
 end

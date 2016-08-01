@@ -1,6 +1,4 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require_relative "../lib/invoice_item_repository"
 require_relative "../lib/sales_engine"
 require 'csv'
@@ -10,10 +8,13 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   attr_reader :invoice_item_repository
 
   def setup
-    # @se = SalesEngine.from_csv({
-    #                              :items     => "./data/items.csv",
-    #                              :merchants => "./data/merchants.csv",
-    #                             })
+     @se = SalesEngine.from_csv({
+                                 :items     => "./data/items.csv",
+                                 :merchants => "./data/merchants.csv",
+                                 :invoices  => "./data/invoices.csv",
+                                 :transactions => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv"
+                                })
     @invoice_item_repository = InvoiceItemRepository.new("./data/invoice_items.csv")
   end
 

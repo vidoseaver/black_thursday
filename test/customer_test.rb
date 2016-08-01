@@ -1,6 +1,4 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require_relative "../lib/customer"
 # require_relative "../lib/merchant_repository"
 require_relative "../lib/sales_engine"

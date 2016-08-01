@@ -1,6 +1,4 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require_relative "../lib/transactions_repository"
 require_relative "../lib/sales_engine"
 require 'csv'
@@ -10,10 +8,13 @@ class TranactionRepositoryTest < MiniTest::Test
   attr_reader :transaction_repository
 
   def setup
-    # @se = SalesEngine.from_csv({
-    #                              :items     => "./data/items.csv",
-    #                              :merchants => "./data/merchants.csv",
-    #                             })
+    @se = SalesEngine.from_csv({
+                                 :items     => "./data/items.csv",
+                                 :merchants => "./data/merchants.csv",
+                                 :invoices  => "./data/invoices.csv",
+                                 :transactions => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv"
+                                })
     @transaction_repository = TransactionRepository.new("./data/transactions.csv")
   end
 

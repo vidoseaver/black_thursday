@@ -1,6 +1,4 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require_relative "../lib/item_repository"
 require_relative "../lib/sales_engine"
 require 'csv'
@@ -13,6 +11,9 @@ class ItemRepositoryTest < MiniTest::Test
     @se = SalesEngine.from_csv({
                                  :items     => "./data/items.csv",
                                  :merchants => "./data/merchants.csv",
+                                 :invoices  => "./data/invoices.csv",
+                                 :transactions => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv"
                                 })
     @item_repository = ItemRepository.new("./data/items.csv")
   end

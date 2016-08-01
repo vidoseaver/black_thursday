@@ -1,6 +1,4 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require_relative "../lib/customer_repository"
 require_relative "../lib/sales_engine"
 
@@ -11,10 +9,13 @@ class CustomerRepositoryTest < MiniTest::Test
   attr_reader :customer_repository
 
   def setup
-    # @se = SalesEngine.from_csv({
-    #                              :items     => "./data/items.csv",
-    #                              :merchants => "./data/merchants.csv",
-    #                             })
+    @se = SalesEngine.from_csv({
+                                 :items     => "./data/items.csv",
+                                 :merchants => "./data/merchants.csv",
+                                 :invoices  => "./data/invoices.csv",
+                                 :transactions => "./data/transactions.csv",
+                                 :invoice_items => "./data/invoice_items.csv"
+                                })
     @customer_repository = CustomerRepository.new("./data/customers.csv")
   end
 

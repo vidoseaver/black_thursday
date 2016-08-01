@@ -15,12 +15,20 @@ class SalesAnalyst
     @sales_engine.find_items_by_merchant_id(merchant_id).count
   end
 
+  def merchant_invoice_count(merchant_id)
+    @sales_engine.find_invoices_by_merchant_id(merchant_id).count
+  end
+
   def merchant_count
     @sales_engine.merchant_count
   end
 
   def item_count
     @sales_engine.item_count
+  end
+
+  def invoice_count
+    @sales_engine.invoice_count
   end
 
   def average_items_per_merchant
@@ -85,24 +93,31 @@ class SalesAnalyst
     end
   end
 
+  def average_invoices_per_merchant
+    (invoice_count/merchant_count.to_f).round(2)
+  end
+
+  def average_invoices_per_merchant_standard_deviation
+    total = all_merchants.map do |merchant|
+      ((merchant_invoice_count(merchant.id)) - average_invoices_per_merchant)**2
+    end
+    Math.sqrt(total.reduce(:+)/(total.length-1)).round(2)
+  end
+
+  def top_merchants_by_invoice_count
+    standard_deviation = average_invoices_per_merchant_standard_deviation
+
+    all_merchants.find_all do |merchant|
+      merchant_invoice_count(merchant.id) > ((standard_deviation *2) + average_invoices_per_merchant )
+    end
+  end
+
+  def bottom_merchants_by_invoice_count
+    standard_deviation = average_invoices_per_merchant_standard_deviation
+
+    all_merchants.find_all do |merchant|
+      merchant_invoice_count(merchant.id) < ((-standard_deviation *2) + average_invoices_per_merchant )
+    end
+  end
+
 end
-
-
-
-  #-average_item_price_for_merchant
-  #add the unit prices of the items and divide them by the total number of items
-  #SHOULD RETURN BIGDECIMAL
-
-  #average AVERAGE price per merchant
-
-  # golden_items top 2.5%    correct?
-
-#methods:
-
-  #sa.average_items_per_merchant_standard_deviation # => 3.26
-
-  #sa.merchants_with_high_item_count # => [merchant, merchant, merchant]
-
-  #sa.average_item_price_for_merchant(6) # => BigDecimal
-
-  #sa.average_average_price_per_merchant # => BigDecimal

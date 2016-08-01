@@ -25,12 +25,20 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 1, @sa.merchant_items_count(12334141)
   end
 
+  def test_it_can_find_how_many_invoices_a_merchant_has
+    assert_equal 0, @sa.merchant_invoice_count(12334141)
+  end
+
   def test_it_knows_the_number_of_merchants
     assert_equal 475, @sa.merchant_count
   end
 
   def test_item_count
     assert_equal 9, @sa.item_count
+  end
+
+  def test_invoice_count
+    assert_equal 19, @sa.invoice_count
   end
 
   def test_merchant_items
@@ -72,8 +80,24 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 128.89235694088995, @sa.standard_deviation_of_items
   end
 
-
   def test_golden_items
     assert_instance_of Item, @sa.golden_items.last
   end
+
+  def test_it_returns_the_average_invoices_per_merchant
+    assert_equal 0.04, @sa.average_invoices_per_merchant
+  end
+
+  def test_average_invoices_per_merchant_standard_deviation
+    assert_equal 0.22, @sa.average_invoices_per_merchant_standard_deviation
+  end
+
+  def test_top_merchants_by_invoice_count
+    assert_equal 17, @sa.top_merchants_by_invoice_count.count
+  end
+
+  def test_bottom_merchants_by_invoice_count
+    assert_equal [], @sa.bottom_merchants_by_invoice_count
+  end
+
 end

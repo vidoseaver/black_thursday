@@ -20,5 +20,7 @@ class Invoice
               @updated_at  = Time.parse(invoice_data[:updated_at])
               @parent      = parent
   end
-
+  def merchant
+    @parent.find_merchant_by_id(merchant_id)
+  end 
 end

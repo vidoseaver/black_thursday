@@ -10,10 +10,13 @@ class InvoiceRepositoryTest < MiniTest::Test
   attr_reader :invoice_repository
 
   def setup
-    # @se = SalesEngine.from_csv({
-    #                              :items     => "./data/items.csv",
-    #                              :merchants => "./data/merchants.csv",
-    #                             })
+    @se = SalesEngine.from_csv({
+        :items     => "./data/items.csv",
+        :merchants => "./data/merchants.csv",
+        :invoices  => "./data/invoices.csv",
+        :transactions => "./data/transactions.csv",
+        :invoice_items => "./data/invoice_items.csv"
+      })
     @invoice_repository = InvoiceRepository.new("./data/invoices.csv")
   end
 
@@ -59,4 +62,7 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal [], invoice_repository.find_all_by_status(:hurry)
   end
 
+  def test_it_finds_by_merchant_id
+    assert_instance_of Merchant, @se.invoices.find_merchant_by_id(12335955)
+  end
 end

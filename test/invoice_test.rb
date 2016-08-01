@@ -7,10 +7,13 @@ require_relative "../lib/sales_engine"
 
 class InvoiceTest < MiniTest::Test
   def setup
-    # @se = SalesEngine.from_csv({
-    #                              :items     => "./data/items.csv",
-    #                              :merchants => "./data/merchants.csv",
-    #                             })
+    @se = SalesEngine.from_csv({
+        :items     => "./data/items.csv",
+        :merchants => "./data/merchants.csv",
+        :invoices  => "./data/invoices.csv",
+        :transactions => "./data/transactions.csv",
+        :invoice_items => "./data/invoice_items.csv"
+      })
     @invoice = Invoice.new({ :id           => "1",
                              :customer_id  => "1",
                              :merchant_id  => "12335938",
@@ -42,5 +45,9 @@ class InvoiceTest < MiniTest::Test
 
   def test_it_holds_a_parsed_updated_at
     assert_equal true, @invoice.updated_at.is_a?(Time)
+  end
+
+  def test_it_finds_by_merchant_id
+    assert_instance_of Merchant, @se.invoices.find_merchant_by_id(12335955).invoices[0]
   end
 end

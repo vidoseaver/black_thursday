@@ -40,11 +40,15 @@ class SalesEngine
   end
 
   def merchant_count
-    merchants.merchant_count
+    merchants.all.count
   end
 
   def item_count
-    @items.item_count
+    items.all.count
+  end
+
+  def invoice_count
+    invoices.all.count
   end
 
   def all_merchants

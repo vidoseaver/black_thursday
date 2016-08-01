@@ -54,12 +54,12 @@ class InvoiceItemRepositoryTest < MiniTest::Test
     assert_equal 263519844, invoice_item_repository.find_all_by_invoice_id(1).first.item_id
   end
 
-#   def test_it_can_tell_you_which_merchant_sells_it
-#     assert_instance_of Merchant, @se.items.find_by_id(263395237).merchant
-#   end
-#
-#   def test_item_count
-#     assert_equal 9, @se.items.all.count
-#   end
+  def test_it_can_tell_you_which_merchant_sells_it
+    assert_instance_of Merchant, @se.items.find_by_id(263395237).merchant
+  end
+
+  def test_item_count
+    assert_equal 9, @se.items.all.count
+  end
 #
 end

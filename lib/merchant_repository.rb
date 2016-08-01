@@ -48,12 +48,15 @@ attr_reader :all
   def find_invoices_by_merchant_id(merchant_id_input)
     @sales_engine.find_invoices_by_merchant_id(merchant_id_input)
   end
-  
+
+  def find_customers_by_invoices(invoices_array)
+    @sales_engine.find_customers_by_invoices(invoices_array)
+  end
+
 
   def merchant_count
     @all.count
   end
-
 
 
   def inspect

@@ -48,5 +48,9 @@ class MerchantTest < MiniTest::Test
     assert_instance_of Invoice, @se.merchants.find_invoices_by_merchant_id(12335938)[0]
   end
 
+  def test_customers_gets_array_of_invoices
+    assert_equal true, @se.merchants.find_by_id(12335311).customers.is_a?(Array)
+  end
+
 
 end

@@ -79,4 +79,9 @@ class SalesEngineTest < MiniTest::Test
   def test_it_gets_all_items_by_invoice_id
     assert_instance_of Invoice, @se.find_invoice_by_invoice_id(14)
   end
+
+  def test_it_can_find_customers_by_invoice_id
+    invoice = [@se.invoices.find_by_id(1)]
+    assert_instance_of Customer, @se.find_customers_by_invoices(invoice).last
+  end
 end

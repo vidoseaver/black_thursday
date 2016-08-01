@@ -36,5 +36,6 @@ class Invoice
     @parent.find_customer_by_invoice_id(customer_id)
   end
 
+  # def merchant 
 
 end

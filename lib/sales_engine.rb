@@ -59,4 +59,7 @@ class SalesEngine
     items.all
   end
 
+  def all_invoices
+    invoices.all
+  end
 end

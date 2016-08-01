@@ -68,4 +68,8 @@ class SalesEngineTest < MiniTest::Test
   def test_it_gets_the_invoices
     assert_instance_of Invoice, @se.find_invoices_by_merchant_id(12335938)[0]
   end
+
+  def test_it_gets_all_invoices
+    assert_equal 19, @se.all_invoices.length
+  end
 end

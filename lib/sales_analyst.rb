@@ -52,7 +52,6 @@ class SalesAnalyst
 
   def merchants_with_high_item_count
     standard_deviation = average_items_per_merchant_standard_deviation
-
     all_merchants.find_all do |merchant|
       merchant_items_count(merchant.id) > (standard_deviation + average_items_per_merchant)
     end
@@ -106,7 +105,6 @@ class SalesAnalyst
 
   def top_merchants_by_invoice_count
     standard_deviation = average_invoices_per_merchant_standard_deviation
-
     all_merchants.find_all do |merchant|
       merchant_invoice_count(merchant.id) > ((standard_deviation *2) + average_invoices_per_merchant )
     end
@@ -114,10 +112,50 @@ class SalesAnalyst
 
   def bottom_merchants_by_invoice_count
     standard_deviation = average_invoices_per_merchant_standard_deviation
-
     all_merchants.find_all do |merchant|
       merchant_invoice_count(merchant.id) < ((-standard_deviation *2) + average_invoices_per_merchant )
     end
+  end
+
+  def days_invoices_were_created
+    @sales_engine.all_invoices.map do |invoice|
+      invoice.created_at.strftime("%A")
+    end
+  end
+
+  def number_of_invoices_per_given_day
+    invoices_per_day = Hash.new 0
+    days_invoices_were_created.each do |day|
+      invoices_per_day[day] += 1
+    end
+    invoices_per_day
+  end
+
+  def average_invoices_per_day
+    invoice_count/7.0
+  end
+
+  def standard_deviation_of_invoices_per_day
+    total = number_of_invoices_per_given_day.map do |day, count|
+      (count - average_invoices_per_day)**2
+    end
+    Math.sqrt(total.reduce(:+)/(total.length-1)).round(2)
+  end
+
+  def top_days_by_invoice_count
+    days = number_of_invoices_per_given_day
+    standard_deviation = standard_deviation_of_invoices_per_day
+    average = average_invoices_per_day
+    days.select do |day, count|
+      day if count > (standard_deviation + average)
+    end.keys
+  end
+
+  def invoice_status(status_input)
+    count = @sales_engine.all_invoices.find_all do |invoice|
+      invoice.status == status_input
+    end
+    ((count.length.to_f/invoice_count)*100).round(2)
   end
 
 end

@@ -1,14 +1,13 @@
 require './test/test_helper'
 require_relative '../lib/invoice_item'
 require 'bigdecimal'
+require 'pry'
 
-""	"263519844"	"1"	"5"	"13635"	"2012-03-27 14:54:09 UTC"	"2012-03-27 14:54:09 UTC"
-
-class ItemTest < MiniTest::Test
+class InvoiceItemTest < MiniTest::Test
     def setup
-      @first_item = InvoiceItem.new({:id          => "1",
+      @first_item = InvoiceItem.new({:id   => "1",
                               :item_id     => "263519844",
-                              :invoice_id  =>"1",
+                              :invoice_id  => "1",
                               :quantity    => "5",
                               :unit_price  => "13635",
                               :created_at  => "012-03-27 14:54:09 UTC",
@@ -45,7 +44,7 @@ class ItemTest < MiniTest::Test
     end
 
     def test_it_returns_self
-      assert_equal true, @first_item.parent.is_a?(ItemTest)
+      assert_equal true, @first_item.parent.is_a?(InvoiceItemTest)
     end
 
     def test_returns_unit_price_to_dollars

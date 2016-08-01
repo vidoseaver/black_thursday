@@ -46,6 +46,6 @@ class InvoiceTest < MiniTest::Test
   end
 
   def test_it_finds_by_merchant_id
-    assert_instance_of Merchant, @se.invoices.find_merchant_by_id(12335955).invoices[0]
+    assert_instance_of Merchant, @se.invoices.find_merchant_by_id(12335955)
   end
 end

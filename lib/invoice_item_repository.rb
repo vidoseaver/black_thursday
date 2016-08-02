@@ -46,7 +46,6 @@ attr_reader :all
       instance.invoice_id == invoice_id_input.to_i
     end
   end
-
   def inspect
   end
 end

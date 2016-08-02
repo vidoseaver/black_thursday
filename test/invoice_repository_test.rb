@@ -84,4 +84,8 @@ class InvoiceRepositoryTest < MiniTest::Test
   def test_finds_invoice_items_by_invoice_id
     assert_instance_of InvoiceItem, @se.invoices.find_invoice_items_by_invoice_id(1).first
   end
+  def test_it_gets_all_invoice_items_by_date
+    assert_instance_of Invoice, @se.invoices.find_all_by_date(Time.parse("2012-11-23")).first
+    assert_instance_of Invoice, @se.invoices.find_all_by_date(Time.parse("2012-11-23")).last
+  end
 end

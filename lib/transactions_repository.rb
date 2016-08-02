@@ -49,7 +49,7 @@ attr_reader :all
   def find_invoice_by_invoice_id(invoice_id_input)
     @sales_engine.find_invoice_by_invoice_id(invoice_id_input)
   end
-  
+
   def inspect
   end
 end

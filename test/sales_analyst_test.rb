@@ -123,4 +123,18 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 47.37, @sa.invoice_status(:pending)
   end
 
+  def test_it_gets_all_invoice_items_by_date
+    assert_instance_of Invoice, @sa.find_invoices_by_date(Time.parse("2012-11-23")).first
+    assert_instance_of Invoice, @sa.find_invoices_by_date(Time.parse("2012-11-23")).last
+  end
+
+  def test_it_adds_unit_prices_from_invoice_items
+    assert_instance_of BigDecimal, @sa.total_revenue_by_date(Time.parse("2012-11-23"))
+  end
+
+  def test_it_returns_top_earners_by_input
+    assert_instance_of Merchant, @sa.top_revenue_earners(2).first
+    assert_equal 2, @sa.top_revenue_earners(2).length
+
+  end
 end

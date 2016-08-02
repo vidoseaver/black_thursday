@@ -52,8 +52,9 @@ class SalesAnalyst
 
   def merchants_with_high_item_count
     standard_deviation = average_items_per_merchant_standard_deviation
+    average = average_items_per_merchant
     all_merchants.find_all do |merchant|
-      merchant_items_count(merchant.id) > (standard_deviation + average_items_per_merchant)
+      merchant_items_count(merchant.id) > (standard_deviation + average)
     end
   end
 
@@ -105,15 +106,17 @@ class SalesAnalyst
 
   def top_merchants_by_invoice_count
     standard_deviation = average_invoices_per_merchant_standard_deviation
+    average = average_invoices_per_merchant
     all_merchants.find_all do |merchant|
-      merchant_invoice_count(merchant.id) > ((standard_deviation *2) + average_invoices_per_merchant )
+      merchant_invoice_count(merchant.id) > ((standard_deviation *2) + average)
     end
   end
 
   def bottom_merchants_by_invoice_count
     standard_deviation = average_invoices_per_merchant_standard_deviation
-    all_merchants.find_all do |merchant|
-      merchant_invoice_count(merchant.id) < ((-standard_deviation *2) + average_invoices_per_merchant )
+    average = average_invoices_per_merchant
+        all_merchants.find_all do |merchant|
+      merchant_invoice_count(merchant.id) < ((-standard_deviation *2) + average)
     end
   end
 
@@ -157,4 +160,30 @@ class SalesAnalyst
     end
     ((count.length.to_f/invoice_count)*100).round(2)
   end
+
+  def find_invoices_by_date(date_input)
+    @sales_engine.find_invoices_by_date(date_input)
+  end
+
+  def total_revenue_by_date(date_input)
+    invoices = find_invoices_by_date(date_input)
+    invoice_items = invoices.map do |invoice|
+      invoice.invoice_items
+    end
+    invoice_items.flatten!
+    invoice_items.reduce(0) do |total, n|
+      total += ( n.unit_price * n.quantity)
+    end
+  end
+
+  def top_revenue_earners(top_amount=20)
+    real_dealers = all_merchants.find_all do |merchant|
+      merchant.total.class == BigDecimal
+    end
+    dealers = real_dealers.sort_by do |merchant|
+      merchant.total
+    end
+    dealers.last(top_amount)
+  end
+
 end

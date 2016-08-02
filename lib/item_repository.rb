@@ -47,8 +47,10 @@ attr_reader :all
   end
 
   def find_all_by_price_in_range(range)
+
     @all.find_all do |instance|
-      instance if range.min <= (instance.unit_price_to_dollars) && range.max >= (instance.unit_price_to_dollars)
+      price = instance.unit_price_to_dollars
+      instance if range.min <= (price) && range.max >= (price)
     end
   end
 
@@ -61,7 +63,7 @@ attr_reader :all
   def find_merchant_by_id(merchant_id_input)
     @sales_engine.find_merchant_by_id(merchant_id_input)
   end
-  
+
   def item_count
     @all.count
   end

@@ -17,12 +17,12 @@ class SalesEngine
               :customers
 
   def initialize(files_to_load)
-      @items         = ItemRepository.new(files_to_load[:items], self)
-      @merchants     = MerchantRepository.new(files_to_load[:merchants], self)
-      @invoices      = InvoiceRepository.new(files_to_load[:invoices], self)
-      @transactions  = TransactionRepository.new(files_to_load[:transactions], self)
-      @invoice_items = InvoiceItemRepository.new(files_to_load[:invoice_items], self)
-      @customers     = CustomerRepository.new(files_to_load[:customers], self)
+  @items         = ItemRepository.new(files_to_load[:items], self)
+  @merchants     = MerchantRepository.new(files_to_load[:merchants], self)
+  @invoices      = InvoiceRepository.new(files_to_load[:invoices], self)
+  @transactions  = TransactionRepository.new(files_to_load[:transactions], self)
+  @invoice_items = InvoiceItemRepository.new(files_to_load[:invoice_items],self)
+  @customers     = CustomerRepository.new(files_to_load[:customers], self)
 
   end
 
@@ -50,8 +50,8 @@ class SalesEngine
   end
 
   def find_items_by_invoice_id(invoice_id_input)
-    invoice_items_to_iterate  = invoice_items.find_all_by_invoice_id(invoice_id_input)
-    invoice_items_to_iterate.map do |invoice_item|
+    items_to_iterate  = invoice_items.find_all_by_invoice_id(invoice_id_input)
+    items_to_iterate.map do |invoice_item|
       items.find_by_id(invoice_item.item_id)
     end
   end
@@ -74,6 +74,10 @@ class SalesEngine
 
   def find_invoices_by_customer_id(customer_id_input)
     invoices.find_all_invoices_by_customer_id(customer_id_input)
+  end
+
+  def find_invoices_by_date(date_input)
+    invoices.find_all_by_date(date_input)
   end
 
   def find_customers_by_invoices(invoices_array)

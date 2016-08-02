@@ -97,4 +97,10 @@ class SalesEngineTest < MiniTest::Test
     assert_instance_of InvoiceItem, @se.find_invoice_items_by_invoice_id(1).first
   end
 
+  def test_it_gets_all_invoice_items_by_date
+    assert_instance_of Invoice, @se.find_invoices_by_date(Time.parse("2012-11-23")).first
+    assert_instance_of Invoice, @se.find_invoices_by_date(Time.parse("2012-11-23")).last
+  end
+
+
 end

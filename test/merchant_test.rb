@@ -52,5 +52,7 @@ class MerchantTest < MiniTest::Test
     assert_equal true, @se.merchants.find_by_id(12335311).customers.is_a?(Array)
   end
 
-
+  def test_it_has_a_total
+    assert_instance_of BigDecimal, @se.merchants.find_by_id(12337139).total
+  end
 end

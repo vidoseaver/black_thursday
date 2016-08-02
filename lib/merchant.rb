@@ -28,4 +28,12 @@ class Merchant
   def customers
     @parent.find_customers_by_invoices(invoices).uniq
   end
+
+  def total
+    invoices.reduce(0) do |sum, invoice|
+      if invoice.total.class != nil
+        sum += invoice.total
+      end
+    end
+  end
 end

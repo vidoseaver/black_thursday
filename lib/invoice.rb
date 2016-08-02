@@ -48,8 +48,6 @@ class Invoice
     @parent.find_invoice_items_by_invoice_id(id)
   end
 
-
-
   def total
     if is_paid_in_full?
       invoice_items.reduce(0) do |item, num|

@@ -71,11 +71,11 @@ attr_reader :all
       instance.customer_id == customer_id_input
     end
   end
-
-
+  def find_all_by_date(date_input)
+    @all.find_all do |instance|
+      instance.created_at.to_date == date_input.to_date
+    end
+  end
   def inspect
   end
-
-
-
 end

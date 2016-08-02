@@ -3,15 +3,14 @@ require "time"
 require 'pry'
 
 class Transaction
-  attr_reader
-    :id,
-    :invoice_id,
-    :credit_card_number,
-    :credit_card_expiration_date,
-    :result,
-    :created_at,
-    :updated_at,
-    :parent
+  attr_reader :id,
+              :invoice_id,
+              :credit_card_number,
+              :credit_card_expiration_date,
+              :result,
+              :created_at,
+              :updated_at,
+              :parent
 
   def initialize(item_data, parent=nil)
     @id                          = item_data[:id].to_i

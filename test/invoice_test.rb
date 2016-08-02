@@ -53,10 +53,25 @@ class InvoiceTest < MiniTest::Test
   def test_it_returns_array_of_items
     assert_instance_of Item, @se.invoices.find_by_id(3).items.last
   end
+
   def test_it_returns_array_of_transactions
     assert_instance_of Transaction, @se.invoices.find_by_id(19).transactions.last
   end
+
   def test_it_returns_a_customer
     assert_instance_of Customer, @se.customers.find_by_id(2)
+  end
+
+  def test_true_when_paid_in_full
+    assert_equal true, @se.invoices.find_by_id(2).is_paid_in_full?
+  end
+
+  def test_it_gets_an_array_of_invoice_items
+    assert_equal true, @se.invoices.find_by_id(1).invoice_items.is_a?(Array)
+    assert_instance_of InvoiceItem, @se.invoices.find_by_id(1).invoice_items[0]
+  end
+
+  def test_returns_total_amount_of_invoice
+    assert_instance_of BigDecimal, @se.invoices.find_by_id(2).total
   end
 end

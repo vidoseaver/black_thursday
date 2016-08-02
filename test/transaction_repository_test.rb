@@ -62,4 +62,5 @@ class TranactionRepositoryTest < MiniTest::Test
   def test_it_gets_all_items_by_invoice_id
     assert_instance_of Invoice, @se.transactions.find_by_id(40).invoice
   end
+
 end

@@ -19,8 +19,8 @@ class Customer
               @parent     = parent
   end
 
-  def merchant
-    @parent.find_merchant_by_customer_id(customer_id)
+  def merchants
+    @parent.find_merchant_by_customer_id(id)
   end
 
 end

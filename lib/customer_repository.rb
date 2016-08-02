@@ -41,8 +41,9 @@ attr_reader :all
     end
   end
 
-  def find_merchant_by_customer_id
-    @sales_engine.
+  def find_merchant_by_customer_id(customer_id_input)
+    @sales_engine.find_merchants_by_invoices(customer_id_input)
+  end
 
   def inspect
   end

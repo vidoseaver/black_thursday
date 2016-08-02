@@ -77,4 +77,9 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_instance_of Customer, @se.invoices.find_customer_by_invoice_id(2)
   end
 
+  def test_it_finds_invoices_by_customer_id
+    assert_instance_of Invoice, @se.invoices.find_all_invoices_by_customer_id(1).last
+  end
+
+  
 end

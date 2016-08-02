@@ -63,6 +63,11 @@ attr_reader :all
     @sales_engine.find_customer_by_invoice_id(customer_id_input)
   end
 
+  def find_all_invoices_by_customer_id(customer_id_input)
+    all.find_all do |instance|
+      instance.customer_id == customer_id_input
+    end
+  end
 
 
   def inspect

@@ -68,7 +68,7 @@ class SalesAnalyst
     averages = all_merchants.map do |merchant|
       average_item_price_for_merchant(merchant.id)
     end
-  (averages.reduce(:+)/all_merchants.length).round(2)
+    (averages.reduce(:+)/all_merchants.length).round(2)
   end
 
   def average_item_price
@@ -157,5 +157,4 @@ class SalesAnalyst
     end
     ((count.length.to_f/invoice_count)*100).round(2)
   end
-
 end

@@ -47,10 +47,6 @@ attr_reader :all
     end
   end
 
-  
-
-
-
   def inspect
   end
 end

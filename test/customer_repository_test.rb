@@ -10,13 +10,13 @@ class CustomerRepositoryTest < MiniTest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-                                 :items         => "./data/items.csv",
-                                 :merchants     => "./data/merchants.csv",
-                                 :invoices      => "./data/invoices.csv",
-                                 :transactions  => "./data/transactions.csv",
-                                 :invoice_items => "./data/invoice_items.csv",
-                                 :customers     => "./data/customers.csv"
-                                })
+            :items         => "./data/items.csv",
+            :merchants     => "./data/merchants.csv",
+            :invoices      => "./data/invoices.csv",
+            :transactions  => "./data/transactions.csv",
+            :invoice_items => "./data/invoice_items.csv",
+            :customers     => "./data/customers.csv"})
+            
     @customer_repository = CustomerRepository.new("./data/customers.csv")
   end
 
@@ -56,6 +56,4 @@ class CustomerRepositoryTest < MiniTest::Test
   def test_it_returns_empty_array_if_no_matches_to_last_name
     assert_equal [], customer_repository.find_all_by_last_name("joesghrdg")
   end
-
-
 end

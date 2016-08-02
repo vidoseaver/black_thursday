@@ -1,5 +1,4 @@
 require_relative "../lib/customer"
-# require_relative "../lib/item"
 require "csv"
 require 'pry'
 

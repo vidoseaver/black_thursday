@@ -1,5 +1,4 @@
 require_relative "../lib/merchant"
-require_relative "../lib/item"
 require "csv"
 require 'pry'
 
@@ -53,16 +52,10 @@ attr_reader :all
     @sales_engine.find_customers_by_invoices(invoices_array)
   end
 
-
   def merchant_count
     @all.count
   end
 
-
   def inspect
   end
-
-
-
-
 end

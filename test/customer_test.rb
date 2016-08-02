@@ -1,20 +1,15 @@
 require './test/test_helper'
 require_relative "../lib/customer"
-# require_relative "../lib/merchant_repository"
 require_relative "../lib/sales_engine"
 
 class CustomerTest < MiniTest::Test
   def setup
-    # @se = SalesEngine.from_csv({
-    #                              :items     => "./data/items.csv",
-    #                              :merchants => "./data/merchants.csv",
-    #                             })
-    @customer = Customer.new({ :id         => "1",
-                               :first_name => "Joey",
-                               :last_name  => "Ondricka",
-                               :created_at => "2012-03-27 14:54:09 UTC",
-                               :updated_at => "2012-03-27 14:54:09 UTC"})
-
+    @customer = Customer.new({
+                  :id         => "1",
+                  :first_name => "Joey",
+                  :last_name  => "Ondricka",
+                  :created_at => "2012-03-27 14:54:09 UTC",
+                  :updated_at => "2012-03-27 14:54:09 UTC"})
   end
 
   def test_it_holds_an_id

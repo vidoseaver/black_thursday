@@ -5,7 +5,8 @@ require 'pry'
 
 class InvoiceItemTest < MiniTest::Test
     def setup
-      @first_item = InvoiceItem.new({:id   => "1",
+      @first_item = InvoiceItem.new({
+                              :id   => "1",
                               :item_id     => "263519844",
                               :invoice_id  => "1",
                               :quantity    => "5",

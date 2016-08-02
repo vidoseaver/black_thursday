@@ -3,7 +3,6 @@
     "coverage": {
       "/Users/chasedunagan/module1/black_thursday/lib/customer_repository.rb": [
         1,
-        null,
         1,
         1,
         null,
@@ -254,8 +253,10 @@
         12906,
         null,
         null,
+        null,
         1,
         2,
+        null,
         null,
         1,
         0,
@@ -301,7 +302,7 @@
       ],
       "/Users/chasedunagan/module1/black_thursday/lib/merchant_repository.rb": [
         1,
-        1,
+        null,
         1,
         1,
         null,
@@ -403,7 +404,6 @@
         null
       ],
       "/Users/chasedunagan/module1/black_thursday/lib/invoice_repository.rb": [
-        null,
         1,
         1,
         1,
@@ -688,10 +688,6 @@
         1,
         11,
         10978,
-        null,
-        null,
-        null,
-        null,
         null,
         null,
         null,
@@ -1880,7 +1876,7 @@
         null
       ]
     },
-    "timestamp": 1470103242
+    "timestamp": 1470146259
   },
   "Unit Tests": {
     "coverage": {

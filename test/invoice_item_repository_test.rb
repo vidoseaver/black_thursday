@@ -9,13 +9,12 @@ class InvoiceItemRepositoryTest < MiniTest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-                                 :items         => "./data/items.csv",
-                                 :merchants     => "./data/merchants.csv",
-                                 :invoices      => "./data/invoices.csv",
-                                 :transactions  => "./data/transactions.csv",
-                                 :invoice_items => "./data/invoice_items.csv",
-                                 :customers     => "./data/customers.csv"
-                                })
+            :items         => "./data/items.csv",
+            :merchants     => "./data/merchants.csv",
+            :invoices      => "./data/invoices.csv",
+            :transactions  => "./data/transactions.csv",
+            :invoice_items => "./data/invoice_items.csv",
+            :customers     => "./data/customers.csv"})
     @invoice_item_repository = InvoiceItemRepository.new("./data/invoice_items.csv")
   end
 
@@ -24,7 +23,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
     assert_equal 998, invoice_item_repository.all.length
   end
 
-  def test_empty_id_returns_nil #sad test
+  def test_empty_id_returns_nil
     assert_equal nil, invoice_item_repository.find_by_id("not_a_valid_id")
     assert_equal nil, invoice_item_repository.find_by_id(99999999)
   end
@@ -61,5 +60,4 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   def test_item_count
     assert_equal 9, @se.items.all.count
   end
-#
 end

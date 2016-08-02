@@ -17,12 +17,12 @@ class SalesEngine
               :customers
 
   def initialize(files_to_load)
-      @items = ItemRepository.new(files_to_load[:items], self)
-      @merchants = MerchantRepository.new(files_to_load[:merchants], self)
-      @invoices = InvoiceRepository.new(files_to_load[:invoices], self)
-      @transactions = TransactionRepository.new(files_to_load[:transactions], self)
+      @items         = ItemRepository.new(files_to_load[:items], self)
+      @merchants     = MerchantRepository.new(files_to_load[:merchants], self)
+      @invoices      = InvoiceRepository.new(files_to_load[:invoices], self)
+      @transactions  = TransactionRepository.new(files_to_load[:transactions], self)
       @invoice_items = InvoiceItemRepository.new(files_to_load[:invoice_items], self)
-      @customers = CustomerRepository.new(files_to_load[:customers], self)
+      @customers     = CustomerRepository.new(files_to_load[:customers], self)
 
   end
 
@@ -105,6 +105,4 @@ class SalesEngine
   def all_invoices
     invoices.all
   end
-
-
 end

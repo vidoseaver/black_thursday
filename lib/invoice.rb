@@ -36,6 +36,10 @@ class Invoice
     @parent.find_customer_by_invoice_id(customer_id)
   end
 
+  def invoice_items
+    @parent.find_invoice_items_by_invoice_id(id)
+  end
+
   def is_paid_in_full?
     if  transactions.length == 0
       false
@@ -44,8 +48,10 @@ class Invoice
     end
   end
 
-  def invoice_items
-    @parent.find_invoice_items_by_invoice_id(id)
+  def paid_transactions
+    transactions.find_all do |transaction|
+      transaction.result == "success"
+    end
   end
 
   def total
@@ -54,6 +60,12 @@ class Invoice
         item += (num.unit_price * num.quantity)
       end
     end
+  end
+
+  def paid_invoice_items
+    paid_transactions.find_all do |transaction|
+      invoice_items do |invoice_item|
+        transaction.invoice_id == invoice_item.invoice_id
   end
 
 

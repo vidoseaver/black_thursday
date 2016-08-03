@@ -74,4 +74,12 @@ class InvoiceTest < MiniTest::Test
   def test_returns_total_amount_of_invoice
     assert_instance_of BigDecimal, @se.invoices.find_by_id(2).total
   end
+
+  def test_if_returns_only_paid_transactions
+    assert_equal "success", @se.invoices.find_by_id(2).paid_transactions.first.result
+  end
+
+  def test_it_finds_all_invoice_items_with_successful_transactions
+    assert_instance_of InvoiceItem, @se.invoices.find_by_id(2).paid_invoice_items[0]
+  end
 end

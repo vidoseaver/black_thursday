@@ -135,6 +135,5 @@ class SalesAnalystTest < MiniTest::Test
   def test_it_returns_top_earners_by_input
     assert_instance_of Merchant, @sa.top_revenue_earners(2).first
     assert_equal 2, @sa.top_revenue_earners(2).length
-
   end
 end

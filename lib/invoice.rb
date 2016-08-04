@@ -51,7 +51,8 @@ class Invoice
   end
 
   def pending?
-    also_pending = transactions.none? { |transaction| transaction.result == "success" }
+    also_pending =
+    transactions.none? { |transaction| transaction.result == "success" }
     if  also_pending == true
         true
     elsif transactions.length == 0
@@ -81,11 +82,4 @@ class Invoice
       total += thing_to_add.reduce(:+)
     end
   end
-
-
-
-
-
-
-
 end

@@ -7,13 +7,12 @@ require 'bigdecimal'
 class SalesAnalystTest < MiniTest::Test
   def setup
     @sa = SalesAnalyst.new(SalesEngine.new({
-                                             :items     => "./data/items.csv",
-                                             :merchants => "./data/merchants.csv",
-                                             :invoices  => "./data/invoices.csv",
-                                             :transactions => "./data/transactions.csv",
-                                             :invoice_items => "./data/invoice_items.csv",
-                                             :customers => "./data/customers.csv"
-                                            }))
+                             :items     => "./data/items.csv",
+                             :merchants => "./data/merchants.csv",
+                             :invoices  => "./data/invoices.csv",
+                             :transactions => "./data/transactions.csv",
+                             :invoice_items => "./data/invoice_items.csv",
+                             :customers => "./data/customers.csv"}))
   end
 
   def test_it_has_copy_of_sales_engine
@@ -40,10 +39,6 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 19, @sa.invoice_count
   end
 
-  def test_merchant_items
-    # assert_equal 3, @sa.merchant_items(12334185).count
-  end
-
   def test_average_items_per_merchant
     assert_equal 0.02, @sa.average_items_per_merchant
   end
@@ -55,6 +50,7 @@ class SalesAnalystTest < MiniTest::Test
   def test_it_can_access_all_the_items
     assert_instance_of Item, @sa.all_items.last
   end
+  
   def test_average_items_per_merchant_standard_deviation
     assert_equal 0.2, @sa.average_items_per_merchant_standard_deviation
   end
@@ -156,10 +152,11 @@ class SalesAnalystTest < MiniTest::Test
     assert_instance_of Merchant , @sa.merchants_with_only_one_item.last
   end
 
-  def test_returns_all_the_merchants_with_one_item_by_month
-    skip
-    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("January").first
-    assert_equal 2, @sa.merchants_with_only_one_item_registered_in_month("January").length
-    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("January").last
+  def test_most_sold_item_by_merchant
+    assert_equal nil, @sa.most_sold_item_for_merchant(12335938).first
+  end
+
+  def test_best_item_for_merchant
+    assert_equal nil, @sa.best_item_for_merchant(12335938)
   end
 end

@@ -6,13 +6,12 @@ require_relative "../lib/sales_engine"
 class InvoiceTest < MiniTest::Test
   def setup
     @se = SalesEngine.from_csv({
-                                 :items         => "./data/items.csv",
-                                 :merchants     => "./data/merchants.csv",
-                                 :invoices      => "./data/invoices.csv",
-                                 :transactions  => "./data/transactions.csv",
-                                 :invoice_items => "./data/invoice_items.csv",
-                                 :customers     => "./data/customers.csv"
-                                })
+                            :items         => "./data/items.csv",
+                            :merchants     => "./data/merchants.csv",
+                            :invoices      => "./data/invoices.csv",
+                            :transactions  => "./data/transactions.csv",
+                            :invoice_items => "./data/invoice_items.csv",
+                            :customers     => "./data/customers.csv"})
     @invoice = Invoice.new({ :id           => "1",
                              :customer_id  => "1",
                              :merchant_id  => "12335938",

@@ -47,7 +47,6 @@ attr_reader :all
   end
 
   def find_all_by_price_in_range(range)
-
     @all.find_all do |instance|
       price = instance.unit_price_to_dollars
       instance if range.min <= (price) && range.max >= (price)

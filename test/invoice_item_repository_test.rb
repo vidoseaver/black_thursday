@@ -27,7 +27,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
     assert_equal nil, invoice_item_repository.find_by_id("not_a_valid_id")
     assert_equal nil, invoice_item_repository.find_by_id(99999999)
   end
-#
+
   def test_it_finds_by_id
     assert_instance_of InvoiceItem, invoice_item_repository.find_by_id(1)
     assert_equal 263519844, invoice_item_repository.find_by_id(1).item_id

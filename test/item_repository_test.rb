@@ -9,13 +9,12 @@ class ItemRepositoryTest < MiniTest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-                                 :items         => "./data/items.csv",
-                                 :merchants     => "./data/merchants.csv",
-                                 :invoices      => "./data/invoices.csv",
-                                 :transactions  => "./data/transactions.csv",
-                                 :invoice_items => "./data/invoice_items.csv",
-                                 :customers     => "./data/customers.csv"
-                                })
+             :items         => "./data/items.csv",
+             :merchants     => "./data/merchants.csv",
+             :invoices      => "./data/invoices.csv",
+             :transactions  => "./data/transactions.csv",
+             :invoice_items => "./data/invoice_items.csv",
+             :customers     => "./data/customers.csv"})
     @item_repository = ItemRepository.new("./data/items.csv")
   end
 
@@ -75,12 +74,11 @@ class ItemRepositoryTest < MiniTest::Test
     assert_equal "Glitter scrabble frames", item_repository.find_all_by_merchant_id(12334185).first.name
   end
 
+  def test_it_can_tell_you_which_merchant_sells_it
+    assert_instance_of Merchant, @se.items.find_by_id(263395237).merchant
+  end
 
-    def test_it_can_tell_you_which_merchant_sells_it
-      assert_instance_of Merchant, @se.items.find_by_id(263395237).merchant
-    end
   def test_item_count
     assert_equal 9, @se.items.all.count
   end
-
 end

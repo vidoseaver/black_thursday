@@ -13,12 +13,13 @@ class TransactionTest < MiniTest::Test
         :customers => "./data/customers.csv"
       })
 
-      @first_transaction = Transaction.new({:id  => "1",
-            :invoice_id                       => "2179",
-            :credit_card_number            => "4068631943231473",
-            :credit_card_expiration_date   => "2179",
-            :result                        => "success",
-            :created_at                    => "2012-02-26 20:56:56 UTC	",
+      @first_transaction = Transaction.new({
+            :id                             => "1",
+            :invoice_id                     => "2179",
+            :credit_card_number             => "4068631943231473",
+            :credit_card_expiration_date    => "2179",
+            :result                         => "success",
+            :created_at                     => "2012-02-26 20:56:56 UTC	",
             :updated_at                     => "2012-02-26 20:56:56 UTC",
             }, self)
     end

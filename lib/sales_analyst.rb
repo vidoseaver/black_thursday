@@ -209,12 +209,12 @@ class SalesAnalyst
     end
   end
 
-  def merchants_with_only_one_item_registered_in_month(month_name)
+  def merchants_with_only_one_item_registered_in_month(month)
     all_merchants.find_all do |merchant|
-      merchant.created_at.strftime("%B") == month_name && merchant.items.length == 1
+      merchant.created_at.strftime("%B") == month && merchant.items.length == 1
     end
   end
-#we pushed this piece of shit out first try
+
   def most_sold_item_for_merchant(merchant_id)
     our_merchant = all_merchants.find do |merchant|
       merchant.id == merchant_id
@@ -230,7 +230,7 @@ class SalesAnalyst
     end
     reduced = Hash.new{0}
     items.each do |key, value|
-      reduced[key] = value.reduce(0){ |total, sometin| total += sometin.quantity}
+      reduced[key] = value.reduce(0){ |total, sumtin| total += sumtin.quantity}
     end
     max = reduced.values.max
     almost_done = reduced.select do |key,value|
@@ -256,7 +256,8 @@ class SalesAnalyst
     end
     reduced = Hash.new{0}
     items.each do |key, value|
-      reduced[key] = value.reduce(0){ |total, sometin| total += (sometin.unit_price*sometin.quantity)}
+      reduced[key] =
+      value.reduce(0){ |total, value| total +=(value.unit_price*value.quantity)}
     end
     max = reduced.values.max
     almost_done = reduced.select do |key,value|

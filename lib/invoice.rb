@@ -41,11 +41,7 @@ class Invoice
   end
 
   def is_paid_in_full?
-    if  transactions.length == 0
-      false
-    else
-      transactions.all? { |transaction| transaction.result == "success" }
-    end
+      transactions.any? { |transaction| transaction.result == "success" }
   end
 
   def paid_transactions
@@ -54,19 +50,39 @@ class Invoice
     end
   end
 
+  def pending?
+    also_pending = transactions.none? { |transaction| transaction.result == "success" }
+    if  also_pending == true
+        true
+    elsif transactions.length == 0
+      false
+    else
+      false
+    end
+  end
+
   def total
     if is_paid_in_full?
-      invoice_items.reduce(0) do |item, num|
-        item += (num.unit_price * num.quantity)
+      invoice_items.reduce(0) do |sum, num|
+        sum += (num.unit_price * num.quantity)
       end
     end
   end
 
-  def paid_invoice_items
-    paid_transactions.find_all do |transaction|
-      invoice_items do |invoice_item|
-        transaction.invoice_id == invoice_item.invoice_id
+  def revenue
+    paid_transactions.reduce(0) do |total, transaction|
+      thing_to_add = invoice_items.map do |invoice_item|
+        if transaction.invoice_id == invoice_item.invoice_id
+          invoice_item.quantity * invoice_item.unit_price
+        else
+          0
+        end
+      end
+      total += thing_to_add.reduce(:+)
+    end
   end
+
+
 
 
 

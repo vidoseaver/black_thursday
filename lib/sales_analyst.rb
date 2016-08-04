@@ -177,13 +177,93 @@ class SalesAnalyst
   end
 
   def top_revenue_earners(top_amount=20)
-    real_dealers = all_merchants.find_all do |merchant|
-      merchant.total.class == BigDecimal
+    real_dealers = all_merchants.sort_by do |merchant|
+      merchant.revenue
     end
-    dealers = real_dealers.sort_by do |merchant|
-      merchant.total
-    end
-    dealers.last(top_amount)
+    top_dealers = real_dealers.last(top_amount).reverse
   end
 
+  def revenue_by_merchant(id)
+    merchant = @sales_engine.find_merchant_by_id(id)
+    merchant.revenue
+  end
+
+  def merchants_ranked_by_revenue
+    all_merchants.sort_by do |merchant|
+      merchant.revenue
+    end.reverse
+  end
+
+  def merchants_with_pending_invoices
+    waiting_merchants = all_merchants.find_all do |merchant|
+       merchant.invoices.any? do |invoice|
+          invoice.pending?
+      end
+    end
+    waiting_merchants
+  end
+
+  def merchants_with_only_one_item
+    all_merchants.find_all do |merchant|
+      merchant.single_sellers?
+    end
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month_name)
+    all_merchants.find_all do |merchant|
+      merchant.created_at.strftime("%B") == month_name && merchant.items.length == 1
+    end
+  end
+#we pushed this piece of shit out first try
+  def most_sold_item_for_merchant(merchant_id)
+    our_merchant = all_merchants.find do |merchant|
+      merchant.id == merchant_id
+    end
+    paid_invoices = our_merchant.invoices.find_all do |invoice|
+      invoice.is_paid_in_full?
+    end
+    paid_invoice_items = paid_invoices.flat_map do |invoice|
+      invoice.invoice_items
+    end
+    items = paid_invoice_items.group_by do |item|
+      item.item_id
+    end
+    reduced = Hash.new{0}
+    items.each do |key, value|
+      reduced[key] = value.reduce(0){ |total, sometin| total += sometin.quantity}
+    end
+    max = reduced.values.max
+    almost_done = reduced.select do |key,value|
+      key if value == max
+    end
+    almost_done.keys.map do |key|
+      all_items.find {|item| item.id == key}
+    end
+  end
+
+  def best_item_for_merchant(merchant_id)
+    our_merchant = all_merchants.find do |merchant|
+      merchant.id == merchant_id
+    end
+    paid_invoices = our_merchant.invoices.find_all do |invoice|
+      invoice.is_paid_in_full?
+    end
+    paid_invoice_items = paid_invoices.flat_map do |invoice|
+      invoice.invoice_items
+    end
+    items = paid_invoice_items.group_by do |item|
+      item.item_id
+    end
+    reduced = Hash.new{0}
+    items.each do |key, value|
+      reduced[key] = value.reduce(0){ |total, sometin| total += (sometin.unit_price*sometin.quantity)}
+    end
+    max = reduced.values.max
+    almost_done = reduced.select do |key,value|
+      key if value == max
+    end
+    all_items.find do |item|
+    almost_done.keys.first == item.id
+    end
+  end
 end

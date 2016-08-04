@@ -36,4 +36,19 @@ class Merchant
       end
     end
   end
+
+  def revenue
+    invoices.reduce(0) do |total, invoice|
+      if invoice.total.nil?
+        total += 0
+      else
+        total += invoice.total
+      end
+    end
+  end
+
+  def single_sellers?
+    true if items.length == 1
+  end
+
 end

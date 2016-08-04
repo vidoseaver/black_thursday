@@ -136,4 +136,30 @@ class SalesAnalystTest < MiniTest::Test
     assert_instance_of Merchant, @sa.top_revenue_earners(2).first
     assert_equal 2, @sa.top_revenue_earners(2).length
   end
+
+  def test_returns_a_merchants_revenue_by_id
+    assert_equal 0.0, @sa.revenue_by_merchant(12334105).to_f
+  end
+
+  def test_it_ranks_merchants_by_revenue
+    assert_equal 12337139, @sa.merchants_ranked_by_revenue.first.id
+    assert_equal 12337411, @sa.merchants_ranked_by_revenue.last.id
+  end
+
+  def test_it_returns_an_array_of_merchants_that_have_pending_invoices
+    assert_instance_of Merchant, @sa.merchants_with_pending_invoices.last
+  end
+
+  def test_returns_all_merchants_with_only_one_item
+    assert_instance_of Merchant, @sa.merchants_with_only_one_item.first
+    assert_equal 2, @sa.merchants_with_only_one_item.length
+    assert_instance_of Merchant , @sa.merchants_with_only_one_item.last
+  end
+
+  def test_returns_all_the_merchants_with_one_item_by_month
+    skip
+    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("January").first
+    assert_equal 2, @sa.merchants_with_only_one_item_registered_in_month("January").length
+    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("January").last
+  end
 end

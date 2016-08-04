@@ -79,7 +79,8 @@ class InvoiceTest < MiniTest::Test
     assert_equal "success", @se.invoices.find_by_id(2).paid_transactions.first.result
   end
 
-  def test_it_finds_all_invoice_items_with_successful_transactions
-    assert_instance_of InvoiceItem, @se.invoices.find_by_id(2).paid_invoice_items[0]
+  def test_it_returns_true_if_invoices_are_pending
+    assert_equal false, @se.invoices.find_by_id(2).pending?
+    assert_equal true, @se.invoices.find_by_id(1).pending?
   end
 end
